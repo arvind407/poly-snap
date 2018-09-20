@@ -1,28 +1,85 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Expo from "expo";
-import { createStackNavigator } from "react-navigation";
-import Home from "../components/AppComponents/Home";
-import StartScan from "../components/AppComponents/StartScan";
-import UploadReferences from "../components/AppComponents/UploadReferences";
-import OpenReferences from "../components/AppComponents/OpenReferences";
-import About from "../components/AppComponents/About";
-import StartNewScan from "../components/AppComponents/StartNewScan";
-
-const ScanApp = createStackNavigator(
-  {
-    Home: { screen: Home },
-    StartScan: { screen: StartScan },
-    UploadReferences: { screen: UploadReferences },
-    OpenReferences: { screen: OpenReferences },
-    StartNewScan: { screen: StartNewScan }
-  },
-  {
-  }
-);
+import React from 'react';
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { WebBrowser } from 'expo';
+import { AR, takeSnapshotAsync } from "expo";
+import ExpoTHREE, { AR as ThreeAR, THREE } from "expo-three";
+import { View as GraphicsView } from "expo-graphics";
 
 export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
+
   render() {
-    return <ScanApp />;
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View style={styles.welcomeContainer}>
+            <Image
+              source={
+                __DEV__
+                  ? require('../assets/images/choice-hotels.png')
+                  : require('../assets/images/choice-hotels.png')
+              }
+              style={styles.welcomeImage}
+            />
+          </View>
+
+          <View style={styles.helpContainer}>
+            <TouchableOpacity onPress={this._openChoiceHotels} style={styles.helpLink}>
+              <Text style={styles.helpLinkText}>About, Choice Hotels!</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+    );
   }
+
+  _openChoiceHotels = () => {
+    WebBrowser.openBrowserAsync(
+      'https://www.choicehotels.com'
+    );
+  };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 100,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeImage: {
+    width: 140,
+    height: 140,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: -10,
+  },
+  helpContainer: {
+    alignItems: 'center',
+  },
+  helpLink: {
+    paddingVertical: 15,
+  },
+  helpLinkText: {
+    fontSize: 14,
+    color: '#2e78b7',
+  },
+});

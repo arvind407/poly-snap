@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "poly-snap",
+    "name": "hotel-scanner",
     "description": "A very interesting project.",
-    "slug": "poly-snap",
+    "slug": "hotel-scanner",
     "privacy": "public",
     "sdkVersion": "29.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/choice-hotels.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/choice-hotels.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
