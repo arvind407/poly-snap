@@ -10,7 +10,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/choice-hotels.png",
     "splash": {
-      "image": "./assets/images/choice-hotels.png",
+      "image": "./assets/images/Choice_Logo.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
