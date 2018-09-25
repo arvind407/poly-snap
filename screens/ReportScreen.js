@@ -1,14 +1,15 @@
 import React from "react";
-import {Alert, Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ModalDropdown from 'react-native-modal-dropdown';
 import { View as GraphicsView } from "expo-graphics";
-import { AR } from "expo";
+import { AR, takeSnapshotAsync } from "expo";
 import ExpoTHREE, { AR as ThreeAR, THREE } from "expo-three";
 export default class ReportScreen extends React.Component {
   static navigationOptions = {
     title: 'Report Issue',
   };
   state = {
+    cameraRollUri: null,
     description: '',
     roomNumber: '',
     priority: 'Select Priority',
@@ -52,6 +53,7 @@ export default class ReportScreen extends React.Component {
         {text: 'OK', onPress: () => {
           this.lookaheadFilter.select(-1);
           this.setState({
+            cameraRollUri: null,
             description: '',
             roomNumber: '',
             priority: 'Select Priority',
@@ -61,6 +63,15 @@ export default class ReportScreen extends React.Component {
       { cancelable: false }
     )
   }
+
+  onCapture = async () => {
+    let result = await takeSnapshotAsync(this._container, {
+    format: "png",
+    result: "file"
+    });
+    let self = this;
+    this.setState({ cameraRollUri: result });
+    };
 
   render() {
     return (
@@ -94,6 +105,8 @@ export default class ReportScreen extends React.Component {
           placeholder="Description"
           placeholderTextColor="black"
         />
+        {this.state.cameraRollUri &&
+        <Image style={{width: 50, height: 50}} source={{uri: this.state.cameraRollUri}} />}
         <View>
           <TouchableOpacity
             style={styles.submitButton}
@@ -117,6 +130,16 @@ export default class ReportScreen extends React.Component {
             isArCameraStateEnabled
             arTrackingConfiguration={AR.TrackingConfigurations.World}
           />
+
+          <View style={{ bottom: 0, height: 60, borderBottomWidth: .5, borderBottomColor: "#d3d3d3"}}>
+          <View style={{flex: 1, flexDirection: 'column', backgroundColor: "white" , alignItems: "center"}}>
+            <TouchableOpacity style={{position: "absolute", top: -55}} onPress={this.onCapture}>
+              <Image
+                style={{width: 50, height: 50}}
+                source={require('../assets/images/camera.png')} />
+            </TouchableOpacity>
+          </View>
+        </View>
         </View>
       </View>
     );
