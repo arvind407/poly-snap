@@ -65,9 +65,9 @@ export default class Login extends Component {
         {!loginPendingStatus && (
           <View>
             <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeUserText}> Welcome Arvind</Text>
+              <Text style={styles.welcomeUserText}> Welcome Kareena</Text>
               <Image
-                source={require("../../assets/images/robot-prod.png")}
+                source={require("../../assets/images/Hotel_Staff.png")}
                 style={styles.welcomeUserImage}
               />
             </View>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     width: 300
   },
   buttonContainer: {
-    backgroundColor: "#2980b6",
+    backgroundColor: "#b55613",
     paddingVertical: 15
   },
   buttonText: {
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     fontWeight: "700"
   },
   buttonLogoutContainer: {
-    backgroundColor: "#2980b6",
+    backgroundColor: "#b55613",
     paddingVertical: 15
   },
   welcomeContainer: {
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     fontWeight: "900"
   },
   welcomeUserImage: {
-    width: 50,
-    height: 50,
+    width: 100,
+    height: 100,
     resizeMode: "contain",
     marginTop: 10
   },

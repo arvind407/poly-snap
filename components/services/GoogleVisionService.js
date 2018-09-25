@@ -15,6 +15,7 @@ const GoogleVisionService = {
           textContent = textContent + "," + labelAnnotation.description;
         });
 
+        console.log("Here Here",textContent);
         return textContent;
       })
       .catch(function(error) {
